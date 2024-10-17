@@ -15,7 +15,6 @@ def resolve_dns(domain):
         ip_address = socket.gethostbyname(domain)
         return domain, ip_address
     except socket.gaierror as e:
-        # return domain, f"Error: {e}"
         pass
 
 def resolve_dns_names_concurrently(domains, pb, max_workers=10):
@@ -37,14 +36,11 @@ def resolve_dns_names_concurrently(domains, pb, max_workers=10):
                 print(f"\nDomain {domain} is valid")
                 pb.update(1)
             except Exception as e:
-                # results[domain] = f"Unhandled Error: {e}"
                 pb.update(1)
     return results
 
 if __name__ == "__main__":
-    # Example usage: user input of domain names
-    # domain_list = input("Enter domain names separated by commas: ").split(',')
-    # domain_list = [domain.strip() for domain in domain_list]  # Clean up any extra whitespace
+    
     tld = input("Enter the domain to brute force (ex. \"dnsdomain.com\"): ")
     if tld.strip() == "":
         print("Error: Domain cannot be empty")
@@ -54,7 +50,6 @@ if __name__ == "__main__":
     dic_bf = dic_bf.strip()
 
 
-    # with open('dict.txt', 'r') as file:
     try:
         with open(dic_bf, 'r') as file:
             hosts = file.readlines()
